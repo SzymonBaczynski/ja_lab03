@@ -1,0 +1,40 @@
+﻿# mov ECX 5   ; store the number of iterations in ECX register
+# L1:
+# (loop code)
+# loop l1
+
+0 <--  + 0 * 4
+1 <--  + 1 * 4
+2 <--  + 2 * 4
+
+
+Przekazanie argumentów całkowitych
+
+W przypadku, gdy do funkcji przekazujemy argumenty numeryczne całkowite, w szczególności np. adresy i wskaźniki, należy użyć w kolejności następujących rejestrów:
+
+    argument 1 → RCX,
+    argument 2 → RDX,
+    argument 3 → R8,
+    argument 4 → R9,
+    każdy kolejny argument umieszczamy na stosie z zachowaniem szesnastobitowego wyrównania danych (z przyczyn wydajnościowych).
+
+Przykładowy kod w C++:
+func1(int a, int b, int c, int d, int e, int f);
+// a w RCX, b w RDX, c w R8, d w R9, f, a następnie e, są odkładane na stosie
+
+Przekazywanie argumentów zmiennoprzecinkowych
+
+W przypadku przekazywania argumentów zmiennoprzecinkowych, kolejne wartości łądujemy do rejestrów XMM:
+
+    argument 1 → XMM0,
+    argument 2 → XMM1,
+    argument 3 → XMM2,
+    argument 4 → XMM3,
+    analogicznie jak dla stałoprzecinkowych.
+
+Przykładowy kod w C++:
+
+func2(float a, double b, float c, double d, float e, float f);
+// a jest XMM0, b w XMM1, c w XMM2, d w XMM3, f a następnie e są odkładane na stosie
+
+

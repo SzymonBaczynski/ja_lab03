@@ -1,0 +1,4 @@
+LIBRARY DllAsm
+EXPORTS ProcAsm3
+EXPORTS ProcAsm2
+EXPORTS ProcAsm1
