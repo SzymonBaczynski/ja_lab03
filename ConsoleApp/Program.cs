@@ -15,10 +15,10 @@ class Program
     static int[] n1Array = { 12, 10, 10, 10, 10, 10, 10, 10, 10, 13, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11 };
 
     [DllImport("DLLAsm.dll")]
-    private static unsafe extern int ProcAsm4(StructToMean* structurePtr);
+    private static unsafe extern int Srednia(StructToMean* structurePtr);
 
-    public static float[] a1 = { 2, 4, 6, 8, 10, 12, 14, 16, 2, 4, 6, 8, 10, 12, 14, 16 };
-    public static float[] a2 = { 3, 6, 9, 12, 15, 18, 3, 6, 9, 12, 15, 18, 3, 6, 9, 12 };
+    public static float[] a1 = { 8, 4, 6, 8, 10, 12, 14, 16, 2, 4, 6, 8, 10, 12, 14, 16 };
+    public static float[] a2 = { 5, 6, 9, 12, 15, 18, 3, 6, 9, 12, 15, 18, 3, 6, 9, 12 };
     public static float[] a3 = new float[16];
 
     public static StructToMean meanStruct = new StructToMean();
@@ -41,7 +41,7 @@ class Program
                     meanStruct.tab2 = ptr2;
                     meanStruct.tab3 = ptr3;
 
-                    ProcAsm4(aAddress);
+                    Srednia(aAddress);
                 };
             }
 

@@ -1,4 +1,3 @@
 LIBRARY DllAsm
+EXPORTS Srednia
 EXPORTS ProcAsm3
-EXPORTS ProcAsm2
-EXPORTS ProcAsm1
