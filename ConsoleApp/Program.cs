@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-
-//     Zsumowanie wektora danych typu uint (zadeklarowanych po stronie , NET w postaci tablicy1.
-//     jednowymiarowej o wymiarze 20 zmiennych). Funkcja ma zwracać pojedynczą wartość (przez
-//     rejestr). Wskaźnik na tablicę źródłową oraz jej długość należy podać do funkcji w assemblerze
-//     poprzez rejestry.
-
 class Program
 {
     [DllImport("DllAsm.dll")]
-    private static unsafe extern int ProcAsm3(int *pTablica, int dlTablicy);
+    private static unsafe extern int ProcSum(int *pArr, int arrLen);
 
     static int[] n1Array = { 12, 10, 10, 10, 10, 10, 10, 10, 10, 13, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11 };
 
     [DllImport("DLLAsm.dll")]
-    private static unsafe extern int Srednia(StructToMean* structurePtr);
+    private static unsafe extern int ProcMean(StructToMean* structurePtr);
 
     public static float[] a1 = { 8, 4, 6, 8, 10, 12, 14, 16, 2, 4, 6, 8, 10, 12, 14, 16 };
     public static float[] a2 = { 5, 6, 9, 12, 15, 18, 3, 6, 9, 12, 15, 18, 3, 6, 9, 12 };
@@ -27,10 +21,11 @@ class Program
     {
         unsafe
         {
-            fixed (int* pTablica = &n1Array[0])
+            fixed (int* pArr = &n1Array[0])
             {
-                int c = ProcAsm3(pTablica, 20);
-                Console.WriteLine(c);
+                int sum = ProcSum(pArr, 20);
+                Console.WriteLine("Suma tablicy:");
+                Console.WriteLine(sum + "\n");
             }
 
             fixed (StructToMean* aAddress = &meanStruct)
@@ -41,7 +36,7 @@ class Program
                     meanStruct.tab2 = ptr2;
                     meanStruct.tab3 = ptr3;
 
-                    Srednia(aAddress);
+                    ProcMean(aAddress);
                 };
             }
 
@@ -50,7 +45,7 @@ class Program
             for (var i = 0; i < 16; i++)
                 Console.Write($"{(a1[i] + a2[i]) / 2}; ");
 
-            Console.WriteLine("\n Otrzymane wartości:");
+            Console.WriteLine("\nOtrzymane wartości:");
 
             for (var i = 0; i < 16; i++)
                 Console.Write($"{a3[i]}; ");
